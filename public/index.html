@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#173B2F" />
-  <title>DivyaSeva — Online Puja, Daan & Prasad Seva</title>
-  <meta name="description" content="DivyaSeva is a modern Indian online puja, daan and prasad seva platform." />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7b1e22">
+  <title>DivyaSeva — Online Puja, Daan & Prasad Services</title>
+  <meta name="description" content="Modern online puja and daan seva platform for Indian users.">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <script src="js/data.js" defer></script>
-  <script type="module" src="js/firebase-config.js"></script>
-  <script src="js/app.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-page="home">
-  <div class="top-strip">
-    <div class="container">
-      <span><i class="fa-solid fa-location-dot"></i> Built for devotees across India</span>
-      <span><i class="fa-solid fa-phone"></i> Need help? <a href="contact.html">Contact seva support</a></span>
+<body>
+  <div class="announcement">
+    <div class="announcement-track">
+      <span>🪔 Live puja booking open for Indian devotees</span><span>🚚 Prasad delivery available in India</span><span>📿 Sankalp with name & gotra</span><span>🎥 Puja photo/video update</span>
+      <span>🪔 Live puja booking open for Indian devotees</span><span>🚚 Prasad delivery available in India</span><span>📿 Sankalp with name & gotra</span><span>🎥 Puja photo/video update</span>
     </div>
   </div>
   <header class="site-header">
     <div class="container navbar">
-      <a href="index.html" class="brand-logo" aria-label="DivyaSeva home"><img src="assets/logo.svg" alt="DivyaSeva logo"></a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a class="nav-link" data-nav="home" href="index.html">Home</a>
-        <a class="nav-link" data-nav="puja" href="puja.html">Puja</a>
-        <a class="nav-link" data-nav="daan" href="daan.html">Daan</a>
-        <a class="nav-link" data-nav="about" href="about.html">About</a>
-        <a class="nav-link" data-nav="contact" href="contact.html">Contact</a>
+      <a href="index.html" class="brand" aria-label="DivyaSeva home">
+        <span class="brand-mark" data-icon="diya"></span>
+        <span>DivyaSeva<small>Online Puja & Seva</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="index.html" data-nav>Home</a>
+        <a href="puja.html" data-nav>Puja</a>
+        <a href="daan.html" data-nav>Daan</a>
+        <a href="about.html" data-nav>About</a>
+        <a href="contact.html" data-nav>Contact</a>
       </nav>
       <div class="nav-actions">
-        <a class="icon-btn" data-nav="dashboard" href="dashboard.html" aria-label="Dashboard"><i class="fa-regular fa-folder-open"></i></a>
-        <a class="btn btn-primary desktop-only" href="booking.html"><i class="fa-solid fa-hands-praying"></i> Book Seva</a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        <a class="btn btn-soft" href="dashboard.html">Dashboard</a>
+        <a class="btn btn-primary" href="booking.html">Book Seva <span data-icon="arrow"></span></a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span data-icon="menu"></span></button>
       </div>
     </div>
   </header>
@@ -44,154 +43,126 @@
   <main>
     <section class="hero">
       <div class="container hero-grid">
-        <div>
-          <div class="badge"><i class="fa-solid fa-circle-check"></i> Trusted online puja & daan seva</div>
-          <h1>Book sacred seva from home, with full simplicity.</h1>
-          <p class="lead">DivyaSeva connects Indian families with puja, daan and prasad services through a simple mobile-first experience. Choose seva, fill sankalp details and track everything in one place.</p>
+        <div class="hero-copy reveal">
+          <span class="eyebrow">🪔 India’s modern online puja experience</span>
+          <h1>Bring temple blessings closer to your <span>home.</span></h1>
+          <p>Book verified pujas, offer daan, share your sankalp with name and gotra, and receive devotional updates without making the experience complicated.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="puja.html"><i class="fa-solid fa-hands-praying"></i> Explore Puja</a>
-            <a class="btn btn-ghost" href="daan.html"><i class="fa-solid fa-hand-holding-heart"></i> Start Daan</a>
+            <a class="btn btn-primary" href="booking.html">Book Puja Now <span data-icon="arrow"></span></a>
+            <a class="btn btn-soft" href="puja.html">Explore Services</a>
           </div>
-          <div class="hero-stats">
-            <div class="stat-card"><strong>50+</strong><span>Seva options</span></div>
-            <div class="stat-card"><strong>24h</strong><span>Support flow</span></div>
-            <div class="stat-card"><strong>100%</strong><span>Mobile-ready</span></div>
+          <div class="hero-proof">
+            <div class="proof-pill"><span data-icon="diya"></span><strong>50+</strong> curated sevas</div>
+            <div class="proof-pill"><span data-icon="temple"></span><strong>Verified</strong> pandit flow</div>
+            <div class="proof-pill"><span data-icon="heart"></span><strong>Simple</strong> Indian UX</div>
           </div>
         </div>
-        <div class="hero-card reveal">
-          <div class="hero-card-inner">
-            <div class="temple-panel">
-              <div class="row">
-                <div>
-                  <span class="badge"><i class="fa-solid fa-star"></i> Today’s Seva</span>
-                  <h3>Rudrabhishek Puja</h3>
-                  <p>Sankalp with name and gotra, performed with traditional vidhi and update after completion.</p>
-                </div>
-                <div class="temple-icon"><i class="fa-solid fa-om"></i></div>
-              </div>
-              <div class="mini-row">
-                <div class="mini-chip"><span>Starting</span><strong>₹599</strong></div>
-                <div class="mini-chip"><span>Update</span><strong>Photo/Video</strong></div>
-                <div class="mini-chip"><span>Mode</span><strong>Online</strong></div>
-              </div>
-            </div>
-            <div class="floating-card">
-              <strong><i class="fa-solid fa-shield-heart"></i> Simple & transparent</strong>
-              <p>No confusing pages. Clear price, clear form and booking history after every seva.</p>
-            </div>
+        <div class="hero-visual reveal delay-1">
+          <div class="hero-frame"><img src="assets/images/hero-temple.svg" alt="DivyaSeva temple seva visual"></div>
+          <div class="float-card one"><span class="float-icon" data-icon="calendar"></span><div><b>Sankalp received</b><small>Name & gotra added</small></div></div>
+          <div class="float-card two"><span class="float-icon" data-icon="heart"></span><div><b>Prasad update</b><small>Delivery-ready flow</small></div></div>
+          <div class="float-card three"><span class="float-icon" data-icon="temple"></span><div><b>Temple-style UI</b><small>Built for trust</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee-wrap" aria-label="Popular devotional services">
+      <div class="marquee-track">
+        <span class="marquee-item"><span class="dot"></span>Rudrabhishek Puja</span><span class="marquee-item"><span class="dot"></span>Khatu Shyam Seva</span><span class="marquee-item"><span class="dot"></span>Annadaan</span><span class="marquee-item"><span class="dot"></span>Deep Daan</span><span class="marquee-item"><span class="dot"></span>Navgrah Shanti</span><span class="marquee-item"><span class="dot"></span>Satyanarayan Katha</span>
+        <span class="marquee-item"><span class="dot"></span>Rudrabhishek Puja</span><span class="marquee-item"><span class="dot"></span>Khatu Shyam Seva</span><span class="marquee-item"><span class="dot"></span>Annadaan</span><span class="marquee-item"><span class="dot"></span>Deep Daan</span><span class="marquee-item"><span class="dot"></span>Navgrah Shanti</span><span class="marquee-item"><span class="dot"></span>Satyanarayan Katha</span>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container center reveal">
+        <span class="eyebrow">Why users will trust DivyaSeva</span>
+        <h2 class="section-title">A clean seva journey, not a confusing app.</h2>
+        <p class="section-lead">The website is designed to make Indian users understand the service quickly and take action without feeling lost.</p>
+      </div>
+      <div class="container feature-grid">
+        <article class="feature-card reveal"><span class="card-icon" data-icon="temple"></span><h3>Verified ritual flow</h3><p>Every puja page clearly explains the seva, sankalp, offering and update process.</p></article>
+        <article class="feature-card reveal delay-1"><span class="card-icon" data-icon="user"></span><h3>Name & gotra sankalp</h3><p>Booking form collects the important devotional details needed for personalized seva.</p></article>
+        <article class="feature-card reveal delay-2"><span class="card-icon" data-icon="phone"></span><h3>Mobile-first layout</h3><p>Bottom navigation, readable cards, and fast actions make the website feel app-like.</p></article>
+        <article class="feature-card reveal delay-3"><span class="card-icon" data-icon="heart"></span><h3>Daan with purpose</h3><p>Annadaan, gau seva, deep daan and prasad seva sections are easy to understand.</p></article>
+      </div>
+    </section>
+
+    <section class="section tight">
+      <div class="container split">
+        <div class="photo-card reveal"><img src="assets/images/aarti-scene.svg" alt="Aarti seva visual"><div class="photo-label"><b>Beautiful devotional visuals</b><span>Warm Indian colors, soft animations, and picture-based service cards.</span></div></div>
+        <div class="reveal delay-1">
+          <span class="eyebrow">Built for conversion</span>
+          <h2 class="section-title">Simple, emotional and action-focused.</h2>
+          <p class="section-lead">Instead of making the user read too much, DivyaSeva uses clean cards, trust points, short explanations, and direct booking buttons.</p>
+          <div class="hero-actions">
+            <a href="puja.html" class="btn btn-primary">View Puja List <span data-icon="arrow"></span></a>
+            <a href="daan.html" class="btn btn-soft">Offer Daan</a>
           </div>
         </div>
       </div>
     </section>
 
     <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Why DivyaSeva</div>
-            <h2>Clean, devotional and built for trust.</h2>
-            <p>Instead of a crowded website, DivyaSeva keeps the journey simple: choose a seva, submit sankalp details, save booking and receive updates.</p>
-          </div>
-        </div>
-        <div class="grid-4">
-          <article class="feature-card card reveal"><div class="icon-tile"><i class="fa-solid fa-mobile-screen"></i></div><h3>Mobile-first</h3><p>Comfortable layout for Indian users who mostly book from phones.</p></article>
-          <article class="feature-card card reveal"><div class="icon-tile"><i class="fa-solid fa-file-shield"></i></div><h3>Clear sankalp</h3><p>Collect name, gotra, city and preferred date in a clean form.</p></article>
-          <article class="feature-card card reveal"><div class="icon-tile"><i class="fa-solid fa-indian-rupee-sign"></i></div><h3>Indian pricing</h3><p>All service cards use rupee pricing and familiar language.</p></article>
-          <article class="feature-card card reveal"><div class="icon-tile"><i class="fa-solid fa-database"></i></div><h3>Firebase ready</h3><p>Connect Auth and Firestore when you are ready to go live.</p></article>
-        </div>
+      <div class="container center reveal">
+        <span class="eyebrow">Popular pujas</span>
+        <h2 class="section-title">Start with these sevas.</h2>
+        <p class="section-lead">Users can search and filter all pujas from the dedicated Puja page.</p>
       </div>
+      <div class="container services-preview" id="homeServices"></div>
+      <div class="container center" style="margin-top:28px"><a class="btn btn-dark" href="puja.html">See All Puja Services</a></div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Popular Puja</div>
-            <h2>Start with trusted seva options.</h2>
-          </div>
-          <a class="btn btn-ghost" href="puja.html">View all</a>
-        </div>
-        <div id="featuredPujas" class="grid-3"></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Daan Seva</div>
-            <h2>Simple donations with clear purpose.</h2>
-          </div>
-          <a class="btn btn-ghost" href="daan.html">Explore daan</a>
-        </div>
-        <div id="featuredDaan" class="grid-3"></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">How it works</div>
-            <h2>Four simple steps.</h2>
-          </div>
-        </div>
-        <div class="steps">
-          <article class="step card reveal"><h3>Choose seva</h3><p>Select puja or daan from filtered cards.</p></article>
-          <article class="step card reveal"><h3>Fill sankalp</h3><p>Add name, gotra, phone and city.</p></article>
-          <article class="step card reveal"><h3>Confirm booking</h3><p>Your booking is saved locally and to Firebase after setup.</p></article>
-          <article class="step card reveal"><h3>Track updates</h3><p>Check your dashboard for submitted seva details.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section-head"><div><div class="eyebrow">Reviews</div><h2>What early users can feel.</h2></div></div>
-        <div id="testimonials" class="grid-3"></div>
+    <section class="section tight">
+      <div class="container cta-box reveal">
+        <div><h2>Ready to receive your first sankalp?</h2><p>Open the booking form, choose a seva, collect devotee details, and save the request locally or in Firebase Firestore.</p></div>
+        <a class="btn btn-primary" href="booking.html">Book Seva <span data-icon="arrow"></span></a>
       </div>
     </section>
   </main>
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="assets/logo.svg" alt="DivyaSeva" style="width:170px; filter: brightness(0) invert(1) sepia(1) saturate(.3);">
-          <p>DivyaSeva helps Indian devotees book traditional puja, daan and sankalp seva online with a clean, simple and mobile-first experience.</p>
+          <h3>DivyaSeva</h3>
+          <p>A devotional services platform for Indian users to book puja, offer daan, receive updates, and stay connected with traditions from home.</p>
         </div>
         <div>
-          <h4>Explore</h4>
+          <h4>Services</h4>
           <a href="puja.html">Book Puja</a>
           <a href="daan.html">Daan Seva</a>
           <a href="booking.html">Sankalp Form</a>
-          <a href="dashboard.html">My Bookings</a>
         </div>
         <div>
           <h4>Company</h4>
           <a href="about.html">About</a>
           <a href="contact.html">Contact</a>
-          <a href="auth.html">Login</a>
+          <a href="dashboard.html">Dashboard</a>
         </div>
         <div>
           <h4>Support</h4>
+          <a href="mailto:support@divyaseva.in">support@divyaseva.in</a>
           <a href="tel:+919999999999">+91 99999 99999</a>
-          <a href="mailto:care@divyaseva.in">care@divyaseva.in</a>
-          <a href="contact.html">Help Center</a>
+          <a href="auth.html">Login / Register</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© 2026 DivyaSeva. All rights reserved.</span>
-        <span>Made for Indian devotees • Firebase-ready project</span>
+        <span>Built for Firebase Hosting • Made for Indian devotees</span>
       </div>
     </div>
   </footer>
-  <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-    <a data-nav="home" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
-    <a data-nav="puja" href="puja.html"><i class="fa-solid fa-om"></i><span>Puja</span></a>
-    <a data-nav="daan" href="daan.html"><i class="fa-solid fa-hand-holding-heart"></i><span>Daan</span></a>
-    <a data-nav="dashboard" href="dashboard.html"><i class="fa-regular fa-folder-open"></i><span>Bookings</span></a>
-    <a data-nav="auth" href="auth.html"><i class="fa-regular fa-user"></i><span>Account</span></a>
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html" data-nav><span data-icon="temple"></span>Home</a>
+    <a href="puja.html" data-nav><span data-icon="diya"></span>Puja</a>
+    <a href="booking.html" data-nav><span data-icon="calendar"></span>Book</a>
+    <a href="dashboard.html" data-nav><span data-icon="heart"></span>Seva</a>
+    <a href="auth.html" data-nav><span data-icon="user"></span>Account</a>
   </nav>
-  <div id="toast" class="toast"></div>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/firebase-config.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>

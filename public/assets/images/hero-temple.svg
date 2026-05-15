@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" role="img" aria-labelledby="title desc">
+<title id="title">Temple illustration</title>
+<desc id="desc">Warm illustration of an Indian temple with lamps and sunrise.</desc>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff4dc"/><stop offset="0.52" stop-color="#f3c270"/><stop offset="1" stop-color="#7b1e22"/></linearGradient>
+  <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f8dfad"/><stop offset="1" stop-color="#c98b42"/></linearGradient>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#3b1a10" flood-opacity=".22"/></filter>
+</defs>
+<rect width="900" height="720" rx="46" fill="url(#sky)"/>
+<circle cx="710" cy="128" r="78" fill="#fff4c7" opacity=".9"/>
+<path d="M0 546c132-63 241-68 370-17s246 56 530-39v230H0z" fill="#5f231e" opacity=".24"/>
+<path d="M0 589c180-74 331-49 452-13 139 41 278 19 448-71v215H0z" fill="#3e3324" opacity=".2"/>
+<g filter="url(#shadow)">
+  <path d="M190 620h520v42H190z" fill="#5b3523"/>
+  <path d="M226 560h448v68H226z" fill="#7b3f28"/>
+  <path d="M254 470h392v101H254z" fill="url(#stone)"/>
+  <path d="M294 395h312v91H294z" fill="#e2a255"/>
+  <path d="M335 310h230v103H335z" fill="#d48939"/>
+  <path d="M382 221h136v105H382z" fill="#be6e25"/>
+  <path d="M423 136h54v100h-54z" fill="#9e481d"/>
+  <path d="M450 92l54 62H396z" fill="#7b1e22"/>
+  <path d="M278 395l172-172 172 172z" fill="#7b1e22" opacity=".94"/>
+  <path d="M355 310l95-118 95 118z" fill="#8f2c2a"/>
+  <path d="M410 220l40-70 40 70z" fill="#6e1d21"/>
+  <path d="M410 620V492c0-35 22-63 49-63s49 28 49 63v128z" fill="#332014"/>
+  <path d="M438 620V496c0-18 10-32 22-32s22 14 22 32v124z" fill="#f5be62" opacity=".55"/>
+  <circle cx="450" cy="370" r="34" fill="#5a2b1f" opacity=".25"/>
+  <path d="M278 474h344" stroke="#8f522f" stroke-width="12" stroke-linecap="round" opacity=".45"/>
+</g>
+<g opacity=".95">
+  <ellipse cx="140" cy="646" rx="52" ry="11" fill="#351911" opacity=".25"/>
+  <path d="M112 630c9 16 46 16 56 0-9 34-46 34-56 0z" fill="#a64a24"/>
+  <path d="M137 605c27 23 14 39 0 41-13-2-26-18 0-41z" fill="#ffcb62"/>
+  <ellipse cx="750" cy="642" rx="55" ry="12" fill="#351911" opacity=".25"/>
+  <path d="M719 626c10 18 51 18 62 0-10 37-52 37-62 0z" fill="#a64a24"/>
+  <path d="M748 598c31 26 16 44 0 46-15-2-30-20 0-46z" fill="#ffcb62"/>
+</g>
+<g fill="#fff8df" opacity=".55">
+  <circle cx="92" cy="112" r="6"/><circle cx="158" cy="83" r="4"/><circle cx="822" cy="270" r="5"/><circle cx="754" cy="214" r="4"/><circle cx="228" cy="211" r="5"/>
+</g>
+</svg>

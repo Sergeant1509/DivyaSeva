@@ -1,131 +1,159 @@
-window.DivyaData = {
+window.DIVYASEVA_DATA = {
   services: [
     {
-      id: "rudrabhishek",
-      type: "Puja",
+      id: "mahadev-rudrabhishek",
+      title: "Mahadev Rudrabhishek Puja",
       category: "Shiv Puja",
-      title: "Rudrabhishek Puja",
-      deity: "Lord Shiva",
-      location: "Kashi Vishwanath Temple Partner",
-      price: 799,
+      temple: "Kashi & Ujjain Partner Pandits",
       day: "Monday Special",
-      duration: "45 min",
-      icon: "fa-solid fa-om",
-      description: "A peaceful Shiv puja for mental strength, family harmony and positive energy at home.",
-      includes: ["Name and gotra sankalp", "Puja photo/video update", "Prasad dispatch update"]
+      price: 799,
+      image: "assets/images/aarti-scene.svg",
+      desc: "A calm and powerful Shiv puja for peace, strength, and family wellbeing.",
+      benefits: ["Sankalp with name and gotra", "Puja photo/video update", "Prasad delivery option"]
     },
     {
-      id: "sankat-mochan",
-      type: "Puja",
+      id: "khatu-shyam-seva",
+      title: "Shri Khatu Shyam Gulab Seva",
+      category: "Krishna Puja",
+      temple: "Khatu Shyam Mandir Seva",
+      day: "Thursday Special",
+      price: 551,
+      image: "assets/images/hero-temple.svg",
+      desc: "Offer gulab, ittar and bhog seva with your sankalp for devotion and positivity.",
+      benefits: ["Fresh offering", "WhatsApp update", "Family sankalp"]
+    },
+    {
+      id: "hanuman-chalisa-path",
+      title: "Hanuman Chalisa Path & Sindoor Arpan",
       category: "Hanuman Puja",
-      title: "Sankat Mochan Hanuman Puja",
-      deity: "Lord Hanuman",
-      location: "Hanuman Mandir Seva",
-      price: 599,
-      day: "Tuesday / Saturday",
-      duration: "35 min",
-      icon: "fa-solid fa-hand-holding-heart",
-      description: "For courage, protection, discipline and relief from daily obstacles through Hanuman ji seva.",
-      includes: ["Hanuman Chalisa path", "Sankalp with details", "Digital proof after puja"]
+      temple: "Balaji Seva Mandal",
+      day: "Tuesday/Saturday",
+      price: 501,
+      image: "assets/images/pandit-ritual.svg",
+      desc: "A devotional path and offering for courage, protection and discipline.",
+      benefits: ["Path by verified pandit", "Sindoor offering", "Digital proof"]
     },
     {
-      id: "lakshmi-kuber",
-      type: "Puja",
-      category: "Lakshmi Puja",
+      id: "lakshmi-kuber-puja",
       title: "Lakshmi Kuber Puja",
-      deity: "Maa Lakshmi",
-      location: "Lakshmi Narayan Mandir",
-      price: 999,
+      category: "Prosperity Puja",
+      temple: "Traditional Vedic Ritual",
       day: "Friday Special",
-      duration: "50 min",
-      icon: "fa-solid fa-coins",
-      description: "A traditional prosperity puja for good fortune, stability and positive financial energy.",
-      includes: ["Lakshmi mantra jaap", "Kuber archana", "Prasad booking option"]
+      price: 1100,
+      image: "assets/images/kalash-pattern.svg",
+      desc: "A graceful puja for prosperity, good fortune and positive financial energy.",
+      benefits: ["Puja samagri included", "Sankalp video", "Prasad option"]
     },
     {
-      id: "satyanarayan",
-      type: "Puja",
-      category: "Vishnu Puja",
-      title: "Satyanarayan Katha Puja",
-      deity: "Lord Vishnu",
-      location: "Vishnu Temple Partner",
-      price: 1299,
-      day: "Purnima / Ekadashi",
-      duration: "75 min",
-      icon: "fa-solid fa-book-open-reader",
-      description: "A complete katha and puja for family blessings, peace and gratitude during auspicious days.",
-      includes: ["Complete katha", "Family sankalp", "Photo/video update"]
-    },
-    {
-      id: "durga-saptashati",
-      type: "Puja",
-      category: "Devi Puja",
-      title: "Durga Saptashati Path",
-      deity: "Maa Durga",
-      location: "Devi Mandir Seva",
-      price: 1499,
-      day: "Ashtami / Navratri",
-      duration: "90 min",
-      icon: "fa-solid fa-fire-flame-curved",
-      description: "A powerful Devi path for confidence, protection and removal of negative energy.",
-      includes: ["Durga path", "Kumkum archana", "Digital puja proof"]
-    },
-    {
-      id: "ganesh-vighnaharta",
-      type: "Puja",
+      id: "ganesh-vighna-vinashak",
+      title: "Ganesh Vighna Vinashak Puja",
       category: "Ganesh Puja",
-      title: "Ganesh Vighnaharta Puja",
-      deity: "Lord Ganesha",
-      location: "Ganpati Mandir Partner",
-      price: 699,
+      temple: "Ganpati Seva Peeth",
       day: "Wednesday Special",
-      duration: "40 min",
-      icon: "fa-solid fa-shapes",
-      description: "A simple and auspicious puja before new work, study, travel, business or interviews.",
-      includes: ["Ganesh mantra", "Modak bhog", "Sankalp with name"]
+      price: 699,
+      image: "assets/images/prasad-box.svg",
+      desc: "Begin new work, study, business, or home rituals with Ganpati blessings.",
+      benefits: ["Best for new beginnings", "Name-gotra sankalp", "Puja update"]
+    },
+    {
+      id: "navgrah-shanti",
+      title: "Navgrah Shanti Puja",
+      category: "Grah Shanti",
+      temple: "Vedic Pandit Network",
+      day: "Available Daily",
+      price: 1500,
+      image: "assets/images/river-ghat.svg",
+      desc: "Traditional grah shanti ritual for balance, calmness and spiritual support.",
+      benefits: ["Nine grah mantra path", "Custom sankalp", "Pandit guidance"]
+    },
+    {
+      id: "santan-gopal-puja",
+      title: "Santan Gopal Puja",
+      category: "Family Puja",
+      temple: "Krishna Seva Ritual",
+      day: "Ekadashi Special",
+      price: 1251,
+      image: "assets/images/devotee-phone.svg",
+      desc: "A devotional Krishna puja for family happiness and positive blessings.",
+      benefits: ["Couple sankalp", "Bhog offering", "Photo/video update"]
+    },
+    {
+      id: "satyanarayan-katha",
+      title: "Satyanarayan Katha Seva",
+      category: "Family Puja",
+      temple: "Home & Temple Ritual",
+      day: "Purnima Special",
+      price: 1800,
+      image: "assets/images/aarti-scene.svg",
+      desc: "A complete katha seva for gratitude, family unity and auspicious occasions.",
+      benefits: ["Complete katha", "Prasad preparation", "Family sankalp"]
+    },
+    {
+      id: "mangal-dosh-nivaran",
+      title: "Mangal Dosh Nivaran Puja",
+      category: "Grah Shanti",
+      temple: "Ujjain Ritual Support",
+      day: "Tuesday Special",
+      price: 2100,
+      image: "assets/images/pandit-ritual.svg",
+      desc: "A respectful Vedic ritual for mangal grah shanti and positive marriage energy.",
+      benefits: ["Detailed sankalp", "Pandit-led vidhi", "Digital update"]
     }
   ],
-  daanItems: [
+  donations: [
     {
       id: "annadaan",
       title: "Annadaan Seva",
-      category: "Food Donation",
-      icon: "fa-solid fa-bowl-food",
+      category: "Food Seva",
       price: 251,
-      description: "Contribute towards fresh meals for needy people and temple visitors.",
-      impact: "Feeds 5 people"
+      image: "assets/images/daan-hands.svg",
+      desc: "Contribute to food seva for devotees, children or people in need.",
+      tag: "Most chosen"
     },
     {
       id: "gau-seva",
       title: "Gau Seva",
       category: "Cow Care",
-      icon: "fa-solid fa-wheat-awn",
       price: 351,
-      description: "Support green fodder and care for cows at verified gaushala partners.",
-      impact: "Fodder support"
+      image: "assets/images/kalash-pattern.svg",
+      desc: "Support fodder and care seva through verified local partners.",
+      tag: "Daily seva"
     },
     {
       id: "deep-daan",
       title: "Deep Daan",
       category: "Temple Offering",
-      icon: "fa-solid fa-lightbulb",
       price: 151,
-      description: "Offer lamps at temple for positivity, gratitude and remembrance.",
-      impact: "11 diyas offered"
+      image: "assets/images/aarti-scene.svg",
+      desc: "Offer lamps with your name and sankalp for a peaceful devotional moment.",
+      tag: "Evening aarti"
     },
     {
-      id: "vastra-daan",
-      title: "Vastra Daan",
-      category: "Charity",
-      icon: "fa-solid fa-shirt",
+      id: "mandir-pushp",
+      title: "Mandir Pushp Arpan",
+      category: "Temple Offering",
+      price: 201,
+      image: "assets/images/hero-temple.svg",
+      desc: "Fresh flowers offered at partner temple with your devotional sankalp.",
+      tag: "Fresh offering"
+    },
+    {
+      id: "vidya-daan",
+      title: "Vidya Daan Support",
+      category: "Education Seva",
       price: 501,
-      description: "Contribute towards clothes and essentials for people in need.",
-      impact: "Essential support"
+      image: "assets/images/devotee-phone.svg",
+      desc: "Support educational material seva and student welfare activities.",
+      tag: "Good cause"
+    },
+    {
+      id: "prasad-seva",
+      title: "Prasad Seva",
+      category: "Prasad",
+      price: 301,
+      image: "assets/images/prasad-box.svg",
+      desc: "Sponsor prasad distribution for devotees during special puja days.",
+      tag: "Festival ready"
     }
-  ],
-  testimonials: [
-    { name: "Ritika Sharma", city: "Delhi", text: "The process was simple and respectful. I received the puja update on time and the website felt trustworthy." },
-    { name: "Aman Tiwari", city: "Lucknow", text: "Booking was easy from mobile. The sankalp form and clear pricing made everything simple for my parents too." },
-    { name: "Neha Singh", city: "Jaipur", text: "I liked that DivyaSeva explains what is included before booking. The design is clean and not confusing." }
   ]
 };

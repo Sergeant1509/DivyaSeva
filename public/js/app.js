@@ -1,378 +1,304 @@
-(() => {
-  const data = window.DivyaData || { services: [], daanItems: [], testimonials: [] };
-  const rupee = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
+(function(){
+  const $ = (selector, parent = document) => parent.querySelector(selector);
+  const $$ = (selector, parent = document) => Array.from(parent.querySelectorAll(selector));
+  const DATA = window.DIVYASEVA_DATA || { services: [], donations: [] };
 
-  const $ = (selector, root = document) => root.querySelector(selector);
-  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+  const icon = {
+    diya: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15c3 3 13 3 16 0-2 5-14 5-16 0Z"/><path d="M12 4c5 4 2 8 0 9-2-1-5-5 0-9Z"/></svg>',
+    calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+    temple: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M5 21v-8h14v8M7 13V9l5-5 5 5v4M10 21v-5a2 2 0 0 1 4 0v5"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>',
+    search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+    user: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg>',
+    menu: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>',
+    phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.7.6 2.5a2 2 0 0 1-.5 2.1L8 9.5a16 16 0 0 0 6.5 6.5l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.6.5 2.5.6A2 2 0 0 1 22 16.9Z"/></svg>'
+  };
 
-  function toast(message) {
-    let el = $("#toast");
-    if (!el) {
-      el = document.createElement("div");
-      el.id = "toast";
-      el.className = "toast";
-      document.body.appendChild(el);
-    }
-    el.textContent = message;
-    el.classList.add("show");
-    setTimeout(() => el.classList.remove("show"), 2800);
+  function setIcons(){
+    $$('[data-icon]').forEach(el => {
+      const name = el.dataset.icon;
+      if(icon[name]) el.innerHTML = icon[name];
+    });
   }
 
-  function readJSON(key, fallback) {
-    try { return JSON.parse(localStorage.getItem(key)) || fallback; }
-    catch { return fallback; }
+  function activeNav(){
+    const current = location.pathname.split('/').pop() || 'index.html';
+    $$('[data-nav]').forEach(link => {
+      const href = link.getAttribute('href');
+      const clean = href.split('/').pop();
+      link.classList.toggle('active', clean === current || (current === '' && clean === 'index.html'));
+    });
   }
 
-  function writeJSON(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+  function mobileMenu(){
+    const btn = $('#menuBtn');
+    const links = $('#navLinks');
+    if(!btn || !links) return;
+    btn.addEventListener('click', () => links.classList.toggle('open'));
+    links.addEventListener('click', e => {
+      if(e.target.closest('a')) links.classList.remove('open');
+    });
   }
 
-  function getService(id) {
-    return data.services.find(item => item.id === id) || data.daanItems.find(item => item.id === id);
+  function revealOnScroll(){
+    const items = $$('.reveal');
+    if(!items.length) return;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+    items.forEach(item => observer.observe(item));
   }
 
-  function queryParam(name) {
-    return new URLSearchParams(window.location.search).get(name);
-  }
+  function rupees(amount){ return `₹${Number(amount || 0).toLocaleString('en-IN')}`; }
 
-  function serviceCard(item, mode = "puja") {
-    const href = `booking.html?service=${encodeURIComponent(item.id)}&type=${mode}`;
-    const meta = item.day ? `${item.day} • ${item.duration}` : item.impact;
+  function serviceCard(item){
     return `
-      <article class="service-card card reveal" data-category="${item.category}" data-title="${item.title.toLowerCase()}">
-        <div class="service-art"><i class="${item.icon}"></i></div>
+      <article class="service-card reveal">
+        <div class="service-img">
+          <img src="${item.image}" alt="${item.title}">
+          <span class="badge">${item.category}</span>
+        </div>
         <div class="service-body">
-          <span class="tag"><i class="fa-solid fa-star"></i>${item.category}</span>
           <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <div class="service-meta">
-            <span><i class="fa-regular fa-calendar"></i> ${meta}</span>
-            <span><i class="fa-solid fa-location-dot"></i> India</span>
+          <p>${item.desc}</p>
+          <div class="meta">
+            <span>${icon.temple}${item.temple}</span>
+            <span>${icon.calendar}${item.day}</span>
           </div>
-          <div class="price-row">
-            <span class="price">${rupee.format(item.price)}</span>
-            <a class="btn btn-primary" href="${href}">Book</a>
+          <div class="service-foot">
+            <div class="price"><small>Starts from</small>${rupees(item.price)}</div>
+            <a class="btn btn-primary" href="booking.html?service=${encodeURIComponent(item.id)}">Book ${icon.arrow}</a>
           </div>
         </div>
       </article>
     `;
   }
 
-  function renderCards(containerId, items, mode = "puja", limit = null) {
-    const container = $(`#${containerId}`);
-    if (!container) return;
-    const list = limit ? items.slice(0, limit) : items;
-    container.innerHTML = list.map(item => serviceCard(item, mode)).join("");
-  }
-
-  function initMenu() {
-    const toggle = $("#menuToggle");
-    if (!toggle) return;
-    toggle.addEventListener("click", () => {
-      document.body.classList.toggle("menu-open");
-      const open = document.body.classList.contains("menu-open");
-      toggle.innerHTML = open ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
-    });
-    $$(".nav-link").forEach(link => link.addEventListener("click", () => document.body.classList.remove("menu-open")));
-  }
-
-  function initActiveLinks() {
-    const page = document.body.dataset.page;
-    $$(`[data-nav="${page}"]`).forEach(link => link.classList.add("active"));
-  }
-
-  function initReveal() {
-    const items = $$(".reveal");
-    if (!items.length) return;
-    if (!("IntersectionObserver" in window)) {
-      items.forEach(el => el.classList.add("visible"));
-      return;
-    }
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    items.forEach(el => obs.observe(el));
-  }
-
-  function initHome() {
-    renderCards("featuredPujas", data.services, "puja", 3);
-    renderCards("featuredDaan", data.daanItems, "daan", 3);
-    const tBox = $("#testimonials");
-    if (tBox) {
-      tBox.innerHTML = data.testimonials.map(item => `
-        <article class="testimonial card reveal">
-          <p>“${item.text}”</p>
-          <div class="avatar-row">
-            <div class="avatar">${item.name.charAt(0)}</div>
-            <div><strong>${item.name}</strong><br><span>${item.city}</span></div>
-          </div>
-        </article>
-      `).join("");
-    }
-  }
-
-  function initListing() {
-    const pujaGrid = $("#pujaGrid");
-    const daanGrid = $("#daanGrid");
-    if (pujaGrid) renderCards("pujaGrid", data.services, "puja");
-    if (daanGrid) renderCards("daanGrid", data.daanItems, "daan");
-
-    const search = $("#serviceSearch");
-    const cat = $("#categoryFilter");
-    const sort = $("#sortFilter");
-
-    const source = pujaGrid ? data.services : daanGrid ? data.daanItems : [];
-    const target = pujaGrid || daanGrid;
-    const mode = pujaGrid ? "puja" : "daan";
-    if (!target) return;
-
-    if (cat) {
-      const categories = [...new Set(source.map(item => item.category))];
-      cat.innerHTML = `<option value="all">All categories</option>` + categories.map(c => `<option value="${c}">${c}</option>`).join("");
-    }
-
-    function apply() {
-      const q = (search?.value || "").trim().toLowerCase();
-      const c = cat?.value || "all";
-      const s = sort?.value || "recommended";
-      let list = [...source].filter(item => {
-        const matchesText = !q || `${item.title} ${item.category} ${item.description} ${item.deity || ""}`.toLowerCase().includes(q);
-        const matchesCat = c === "all" || item.category === c;
-        return matchesText && matchesCat;
-      });
-      if (s === "low") list.sort((a, b) => a.price - b.price);
-      if (s === "high") list.sort((a, b) => b.price - a.price);
-      target.innerHTML = list.length ? list.map(item => serviceCard(item, mode)).join("") : `
-        <div class="empty-state" style="grid-column: 1 / -1;">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <h3>No seva found</h3>
-          <p>Try another keyword or category.</p>
-        </div>`;
-      initReveal();
-    }
-
-    [search, cat, sort].forEach(el => el?.addEventListener("input", apply));
-  }
-
-  function initBooking() {
-    const form = $("#bookingForm");
-    const serviceIdInput = $("#serviceId");
-    const selectedTitle = $("#selectedTitle");
-    const selectedPrice = $("#selectedPrice");
-    const selectedType = $("#selectedType");
-    const selectedIncludes = $("#selectedIncludes");
-    const serviceSelect = $("#serviceSelect");
-    if (!form) return;
-
-    const allItems = [...data.services, ...data.daanItems];
-    if (serviceSelect) {
-      serviceSelect.innerHTML = allItems.map(item => `<option value="${item.id}">${item.title} — ${rupee.format(item.price)}</option>`).join("");
-    }
-
-    function setSelected(id) {
-      const item = getService(id) || allItems[0];
-      if (!item) return;
-      serviceIdInput.value = item.id;
-      if (serviceSelect) serviceSelect.value = item.id;
-      if (selectedTitle) selectedTitle.textContent = item.title;
-      if (selectedPrice) selectedPrice.textContent = rupee.format(item.price);
-      if (selectedType) selectedType.textContent = item.type || item.category;
-      if (selectedIncludes) {
-        const inc = item.includes || [item.impact, "Digital confirmation", "Support update"];
-        selectedIncludes.innerHTML = inc.map(x => `<li><i class="fa-solid fa-check"></i> ${x}</li>`).join("");
-      }
-    }
-
-    setSelected(queryParam("service"));
-    serviceSelect?.addEventListener("change", e => setSelected(e.target.value));
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const item = getService(formData.get("serviceId"));
-      const booking = {
-        id: `DS-${Date.now()}`,
-        serviceId: formData.get("serviceId"),
-        serviceTitle: item?.title || "DivyaSeva Booking",
-        price: item?.price || 0,
-        fullName: formData.get("fullName").trim(),
-        phone: formData.get("phone").trim(),
-        gotra: formData.get("gotra").trim(),
-        city: formData.get("city").trim(),
-        preferredDate: formData.get("preferredDate"),
-        notes: formData.get("notes").trim(),
-        status: "Sankalp received",
-        createdAt: new Date().toISOString()
-      };
-
-      if (!booking.fullName || !booking.phone) {
-        toast("Please enter your name and mobile number.");
-        return;
-      }
-
-      const bookings = readJSON("ds_bookings", []);
-      bookings.unshift(booking);
-      writeJSON("ds_bookings", bookings);
-
-      if (window.DivyaFirebase?.ready) {
-        try { await window.DivyaFirebase.addBooking(booking); }
-        catch (err) { console.warn(err); }
-      }
-
-      toast("Booking saved. Check dashboard for details.");
-      form.reset();
-      setSelected(booking.serviceId);
-      setTimeout(() => { window.location.href = "dashboard.html"; }, 800);
-    });
-  }
-
-  function initDashboard() {
-    const list = $("#bookingList");
-    if (!list) return;
-    const bookings = readJSON("ds_bookings", []);
-    if (!bookings.length) {
-      list.innerHTML = `
-        <div class="empty-state">
-          <i class="fa-regular fa-folder-open"></i>
-          <h3>No bookings yet</h3>
-          <p>Your puja and daan bookings will appear here after submission.</p>
-          <a class="btn btn-primary" href="puja.html">Explore Puja</a>
-        </div>`;
-      return;
-    }
-
-    list.innerHTML = bookings.map(item => `
-      <article class="booking-item card reveal">
-        <div class="icon-tile"><i class="fa-solid fa-hands-praying"></i></div>
-        <div>
-          <h3>${item.serviceTitle}</h3>
-          <p>${item.fullName} • ${item.city || "India"} • ${new Date(item.createdAt).toLocaleDateString("en-IN")}</p>
-          <p>${item.phone} ${item.gotra ? "• Gotra: " + item.gotra : ""}</p>
+  function donationCard(item){
+    return `
+      <article class="service-card reveal">
+        <div class="service-img">
+          <img src="${item.image}" alt="${item.title}">
+          <span class="badge">${item.tag}</span>
         </div>
-        <span class="status-pill">${item.status}</span>
+        <div class="service-body">
+          <h3>${item.title}</h3>
+          <p>${item.desc}</p>
+          <div class="meta"><span>${icon.heart}${item.category}</span></div>
+          <div class="service-foot">
+            <div class="price"><small>Seva from</small>${rupees(item.price)}</div>
+            <a class="btn btn-primary" href="booking.html?type=daan&service=${encodeURIComponent(item.id)}">Offer ${icon.arrow}</a>
+          </div>
+        </div>
       </article>
-    `).join("");
+    `;
   }
 
-  function initContact() {
-    const form = $("#contactForm");
-    if (!form) return;
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const fd = new FormData(form);
-      const message = {
-        name: fd.get("name").trim(),
-        phone: fd.get("phone").trim(),
-        email: fd.get("email").trim(),
-        topic: fd.get("topic"),
-        message: fd.get("message").trim(),
-        createdAt: new Date().toISOString()
-      };
-      if (!message.name || !message.phone || !message.message) {
-        toast("Please fill required details.");
-        return;
-      }
-      const messages = readJSON("ds_contacts", []);
-      messages.unshift(message);
-      writeJSON("ds_contacts", messages);
-      if (window.DivyaFirebase?.ready) {
-        try { await window.DivyaFirebase.addContact(message); }
-        catch (err) { console.warn(err); }
-      }
-      form.reset();
-      toast("Message sent. Our team will contact you soon.");
-    });
+  function renderHome(){
+    const preview = $('#homeServices');
+    if(preview){
+      preview.innerHTML = DATA.services.slice(0,3).map(serviceCard).join('');
+    }
   }
 
-  function initAuth() {
-    const authForm = $("#authForm");
-    const modeBtn = $("#modeSwitch");
-    const authTitle = $("#authTitle");
-    const authSub = $("#authSub");
-    const submitBtn = $("#authSubmit");
-    const userBox = $("#userBox");
-    const logoutBtn = $("#logoutBtn");
-    if (!authForm) return;
+  function uniqueCategories(items){ return ['All', ...new Set(items.map(i => i.category))]; }
 
-    let mode = "login";
-    const localUser = readJSON("ds_user", null);
-    showUser(localUser);
+  function setupListing({ gridId, searchId, categoryId, sortId, source, cardFn }){
+    const grid = document.getElementById(gridId);
+    if(!grid) return;
+    const search = document.getElementById(searchId);
+    const category = document.getElementById(categoryId);
+    const sort = document.getElementById(sortId);
 
-    function setMode(next) {
-      mode = next;
-      authTitle.textContent = mode === "login" ? "Welcome back" : "Create your account";
-      authSub.textContent = mode === "login" ? "Login to see bookings and seva updates." : "Create an account for faster bookings.";
-      submitBtn.textContent = mode === "login" ? "Login" : "Create Account";
-      modeBtn.textContent = mode === "login" ? "New user? Create account" : "Already have account? Login";
+    if(category){
+      category.innerHTML = uniqueCategories(source).map(cat => `<option value="${cat}">${cat}</option>`).join('');
     }
 
-    function showUser(user) {
-      if (!userBox) return;
-      if (!user) {
-        userBox.innerHTML = `<p class="form-note">Firebase is optional. Without Firebase, this page works in local demo mode.</p>`;
-        return;
+    function render(){
+      const query = (search?.value || '').trim().toLowerCase();
+      const cat = category?.value || 'All';
+      const sortBy = sort?.value || 'popular';
+      let items = source.filter(item => {
+        const text = `${item.title} ${item.category} ${item.temple || ''} ${item.desc}`.toLowerCase();
+        return (!query || text.includes(query)) && (cat === 'All' || item.category === cat);
+      });
+      if(sortBy === 'low') items = [...items].sort((a,b) => a.price - b.price);
+      if(sortBy === 'high') items = [...items].sort((a,b) => b.price - a.price);
+      grid.innerHTML = items.length ? items.map(cardFn).join('') : '<div class="empty-state">No seva found. Try another search or category.</div>';
+      setTimeout(revealOnScroll, 20);
+    }
+    [search, category, sort].forEach(el => el && el.addEventListener('input', render));
+    render();
+  }
+
+  function firebaseReady(){
+    const cfg = window.DIVYASEVA_FIREBASE_CONFIG || {};
+    return !!(window.firebase && cfg.apiKey && cfg.projectId && cfg.authDomain);
+  }
+
+  function initFirebase(){
+    if(!firebaseReady()) return null;
+    if(!window.__divyaFirebaseApp){
+      window.__divyaFirebaseApp = firebase.initializeApp(window.DIVYASEVA_FIREBASE_CONFIG);
+    }
+    return window.__divyaFirebaseApp;
+  }
+
+  function getAllOfferings(){
+    return [...DATA.services.map(x => ({...x, type:'puja'})), ...DATA.donations.map(x => ({...x, type:'daan', temple:'Seva Partner', day:'Daily Seva'}))];
+  }
+
+  function setupBooking(){
+    const form = $('#bookingForm');
+    if(!form) return;
+    const offeringSelect = $('#serviceSelect');
+    const amountInput = $('#amountInput');
+    const all = getAllOfferings();
+    offeringSelect.innerHTML = '<option value="">Choose seva</option>' + all.map(item => `<option value="${item.id}" data-price="${item.price}">${item.title} — ${rupees(item.price)}</option>`).join('');
+
+    const params = new URLSearchParams(location.search);
+    const serviceId = params.get('service');
+    if(serviceId){ offeringSelect.value = serviceId; }
+    function syncAmount(){
+      const item = all.find(x => x.id === offeringSelect.value);
+      if(item && amountInput) amountInput.value = item.price;
+      const selectedBox = $('#selectedOffering');
+      if(selectedBox && item){
+        selectedBox.innerHTML = `<h3>${item.title}</h3><p>${item.desc}</p><ul>${(item.benefits || ['Digital update','Sankalp with name','Support confirmation']).map(b => `<li>${b}</li>`).join('')}</ul>`;
       }
-      userBox.innerHTML = `<div class="card form-card"><h3>${user.email}</h3><p class="form-note">You are logged in on this device.</p></div>`;
     }
+    offeringSelect.addEventListener('change', syncAmount);
+    syncAmount();
 
-    modeBtn?.addEventListener("click", () => setMode(mode === "login" ? "signup" : "login"));
-    logoutBtn?.addEventListener("click", async () => {
-      localStorage.removeItem("ds_user");
-      try { await window.DivyaFirebase?.logout?.(); } catch {}
-      showUser(null);
-      toast("Logged out.");
-    });
-
-    authForm.addEventListener("submit", async (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const fd = new FormData(authForm);
-      const email = fd.get("email").trim();
-      const password = fd.get("password").trim();
-      if (!email || password.length < 6) {
-        toast("Enter a valid email and 6+ character password.");
-        return;
-      }
+      const message = $('#bookingMessage');
+      const formData = new FormData(form);
+      const booking = Object.fromEntries(formData.entries());
+      const chosen = all.find(x => x.id === booking.serviceId);
+      booking.id = `DS-${Date.now()}`;
+      booking.title = chosen?.title || 'DivyaSeva Booking';
+      booking.createdAt = new Date().toISOString();
+      booking.status = 'Sankalp Received';
+      booking.amount = Number(booking.amount || chosen?.price || 0);
 
-      try {
-        if (window.DivyaFirebase?.ready) {
-          const result = mode === "login"
-            ? await window.DivyaFirebase.login(email, password)
-            : await window.DivyaFirebase.signUp(email, password);
-          writeJSON("ds_user", { email: result.user.email, uid: result.user.uid });
-          showUser({ email: result.user.email });
-        } else {
-          writeJSON("ds_user", { email, uid: `local-${Date.now()}` });
-          showUser({ email });
+      const bookings = JSON.parse(localStorage.getItem('divyasevaBookings') || '[]');
+      bookings.unshift(booking);
+      localStorage.setItem('divyasevaBookings', JSON.stringify(bookings));
+
+      try{
+        const app = initFirebase();
+        if(app){
+          await firebase.firestore().collection('bookings').add(booking);
         }
-        authForm.reset();
-        toast(mode === "login" ? "Logged in successfully." : "Account created successfully.");
-      } catch (err) {
-        toast(err.message || "Auth failed. Check Firebase setup.");
+        form.reset();
+        if(serviceId) offeringSelect.value = serviceId;
+        syncAmount();
+        message.className = 'message success';
+        message.textContent = 'Your sankalp has been saved. You can check it in Dashboard.';
+      }catch(err){
+        message.className = 'message success';
+        message.textContent = 'Saved locally. Firebase is not configured or could not save right now.';
       }
     });
   }
 
-  function initAccordion() {
-    $$(".accordion-btn").forEach(btn => {
-      btn.addEventListener("click", () => btn.closest(".accordion-item")?.classList.toggle("open"));
+  function setupDashboard(){
+    const list = $('#bookingList');
+    if(!list) return;
+    const bookings = JSON.parse(localStorage.getItem('divyasevaBookings') || '[]');
+    if(!bookings.length){
+      list.innerHTML = '<div class="empty-state">No booking yet. Book a puja or daan seva and it will appear here.</div>';
+      return;
+    }
+    list.innerHTML = bookings.map(b => `
+      <article class="booking-item">
+        <div>
+          <h3>${b.title || 'DivyaSeva Booking'}</h3>
+          <p><b>Name:</b> ${b.fullName || 'Not added'} ${b.gotra ? `• <b>Gotra:</b> ${b.gotra}` : ''}</p>
+          <p><b>Phone:</b> ${b.phone || '-'} • <b>Amount:</b> ${rupees(b.amount)}</p>
+          <p><b>Date:</b> ${new Date(b.createdAt).toLocaleString('en-IN')}</p>
+        </div>
+        <span class="status">${b.status || 'Received'}</span>
+      </article>
+    `).join('');
+  }
+
+  function setupContact(){
+    const form = $('#contactForm');
+    if(!form) return;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const message = $('#contactMessage');
+      const request = Object.fromEntries(new FormData(form).entries());
+      request.createdAt = new Date().toISOString();
+      const requests = JSON.parse(localStorage.getItem('divyasevaContacts') || '[]');
+      requests.unshift(request);
+      localStorage.setItem('divyasevaContacts', JSON.stringify(requests));
+      try{
+        const app = initFirebase();
+        if(app) await firebase.firestore().collection('contactRequests').add(request);
+      }catch(err){}
+      form.reset();
+      message.className = 'message success';
+      message.textContent = 'Message received. Our seva team will contact you soon.';
     });
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    initMenu();
-    initActiveLinks();
-    initHome();
-    initListing();
-    initBooking();
-    initDashboard();
-    initContact();
-    initAuth();
-    initAccordion();
-    initReveal();
-  });
+  function setupAuth(){
+    const tabs = $$('.auth-tabs button');
+    const forms = $$('.auth-form');
+    if(!tabs.length) return;
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.toggle('active', t === tab));
+      forms.forEach(form => form.classList.toggle('active', form.dataset.form === tab.dataset.tab));
+    }));
+
+    const loginForm = $('#loginForm');
+    const registerForm = $('#registerForm');
+    loginForm?.addEventListener('submit', async e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(loginForm).entries());
+      const msg = $('#authMessage');
+      try{
+        const app = initFirebase();
+        if(app){ await firebase.auth().signInWithEmailAndPassword(data.email, data.password); }
+        localStorage.setItem('divyasevaUser', JSON.stringify({ email:data.email, name:data.email.split('@')[0] }));
+        msg.className = 'message success'; msg.textContent = 'Login successful. You can now open your dashboard.';
+      }catch(err){ msg.className = 'message error'; msg.textContent = err.message || 'Login failed.'; }
+    });
+    registerForm?.addEventListener('submit', async e => {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(registerForm).entries());
+      const msg = $('#authMessage');
+      try{
+        const app = initFirebase();
+        if(app){ await firebase.auth().createUserWithEmailAndPassword(data.email, data.password); }
+        localStorage.setItem('divyasevaUser', JSON.stringify({ email:data.email, name:data.name }));
+        msg.className = 'message success'; msg.textContent = 'Account created. Firebase mode will activate after config is added.';
+      }catch(err){ msg.className = 'message error'; msg.textContent = err.message || 'Registration failed.'; }
+    });
+  }
+
+  function init(){
+    setIcons();
+    activeNav();
+    mobileMenu();
+    renderHome();
+    setupListing({ gridId:'servicesGrid', searchId:'serviceSearch', categoryId:'serviceCategory', sortId:'serviceSort', source:DATA.services, cardFn:serviceCard });
+    setupListing({ gridId:'donationGrid', searchId:'donationSearch', categoryId:'donationCategory', sortId:'donationSort', source:DATA.donations, cardFn:donationCard });
+    setupBooking();
+    setupDashboard();
+    setupContact();
+    setupAuth();
+    revealOnScroll();
+  }
+
+  document.addEventListener('DOMContentLoaded', init);
 })();

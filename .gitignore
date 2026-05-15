@@ -1,6 +1,8 @@
-node_modules
+node_modules/
 .env
-.firebase
-.firebaserc
-dist
+.env.local
+serviceAccountKey.json
 .DS_Store
+.firebase/
+dist/
+build/

@@ -1,107 +1,65 @@
-# DivyaSeva — Multi-page Firebase-ready Website
+# DivyaSeva — Firebase Ready Multi-Page Website
 
-DivyaSeva is a modern Indian online puja, daan and sankalp seva website. This version is not a single-page layout. It has separate pages, cleaner colors, simpler UI, mobile bottom navigation and Firebase-ready code.
+A modern, mobile-optimized devotional services website for Indian users. Built with clean HTML, CSS, and JavaScript, with optional Firebase Auth + Firestore support.
 
-## Pages included
+## Pages
 
-- `public/index.html` — Homepage
-- `public/puja.html` — Puja listing with search, category filter and price sorting
-- `public/daan.html` — Daan seva listing with search, category filter and price sorting
-- `public/booking.html` — Sankalp / booking form
-- `public/dashboard.html` — Saved booking dashboard
-- `public/auth.html` — Login / signup page, Firebase-ready
-- `public/about.html` — Startup/about page with FAQ
-- `public/contact.html` — Contact/enquiry form
+- `public/index.html` — Home
+- `public/puja.html` — Puja services with search and filters
+- `public/daan.html` — Daan and seva offerings
+- `public/booking.html` — Sankalp/booking form
+- `public/dashboard.html` — User booking dashboard using localStorage/Firebase-ready flow
+- `public/auth.html` — Login/Register page
+- `public/about.html` — About page
+- `public/contact.html` — Contact/support page
 
-## Features
+## Run locally
 
-- Multi-page structure
-- Mobile-first responsive UI
-- Modern Indian devotional color palette
-- Font Awesome icons
-- Smooth reveal animations
-- Puja and daan filters
-- Booking form with local storage fallback
-- Dashboard for submitted bookings
-- Contact form with local storage fallback
-- Firebase Authentication ready
-- Firestore booking/contact ready
-- Firebase Hosting ready
+Use VS Code Live Server and open `public/index.html`.
 
-## How to run on Windows
+Alternative with Node:
 
-### Recommended: VS Code Live Server
-
-1. Open the project folder in VS Code.
-2. Install the extension named **Live Server**.
-3. Open `public/index.html`.
-4. Right-click and choose **Open with Live Server**.
-
-### If Node.js is installed
-
-From the `public` folder:
-
-```powershell
+```bash
+cd public
 npx serve .
 ```
 
-or:
+## Firebase Setup
 
-```powershell
-npx http-server .
+1. Create a Firebase project.
+2. Enable Authentication > Email/Password.
+3. Create Firestore Database.
+4. Open `public/js/firebase-config.js` and paste your Firebase web config.
+5. Install Firebase CLI:
+
+```bash
+npm install -g firebase-tools
 ```
 
-## Firebase setup
+6. Login and deploy:
 
-Open:
-
-```text
-public/js/firebase-config.js
-```
-
-Replace this placeholder config:
-
-```js
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
-```
-
-Then enable:
-
-1. Firebase Authentication > Email/Password
-2. Firestore Database
-3. Firebase Hosting
-
-## Deploy to Firebase Hosting
-
-From the main project folder:
-
-```powershell
+```bash
 firebase login
 firebase use --add
 firebase deploy
 ```
 
-The public directory is already set in `firebase.json`:
+## Hosting settings
 
-```json
-"public": "public"
+When Firebase asks for public directory, use:
+
+```text
+public
 ```
 
-## Important before real launch
+For single-page app rewrite, choose:
 
-This is a startup-ready frontend. For real business launch, add:
+```text
+No
+```
 
-- Verified puja/service fulfilment workflow
-- Admin panel for bookings
-- Real payment gateway such as Razorpay, PhonePe or Cashfree
-- Real refund/cancellation policy
-- Real privacy policy and terms
-- Real support email and phone number
-- Real service images and temple/partner verification
+## Notes
+
+- The site works without Firebase using localStorage demo data.
+- After Firebase config is added, forms can save to Firestore and Auth can work using Firebase Auth.
+- Never commit private admin SDK files like `serviceAccountKey.json`.

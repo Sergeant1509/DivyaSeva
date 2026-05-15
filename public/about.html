@@ -1,119 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#173B2F" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#7b1e22">
   <title>About — DivyaSeva</title>
-  <meta name="description" content="DivyaSeva is a modern Indian online puja, daan and prasad seva platform." />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <meta name="description" content="Learn about DivyaSeva online puja startup.">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <script src="js/data.js" defer></script>
-  <script type="module" src="js/firebase-config.js"></script>
-  <script src="js/app.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-page="about">
-  <div class="top-strip">
-    <div class="container">
-      <span><i class="fa-solid fa-location-dot"></i> Built for devotees across India</span>
-      <span><i class="fa-solid fa-phone"></i> Need help? <a href="contact.html">Contact seva support</a></span>
+<body>
+  <div class="announcement">
+    <div class="announcement-track">
+      <span>🪔 Live puja booking open for Indian devotees</span><span>🚚 Prasad delivery available in India</span><span>📿 Sankalp with name & gotra</span><span>🎥 Puja photo/video update</span>
+      <span>🪔 Live puja booking open for Indian devotees</span><span>🚚 Prasad delivery available in India</span><span>📿 Sankalp with name & gotra</span><span>🎥 Puja photo/video update</span>
     </div>
   </div>
   <header class="site-header">
     <div class="container navbar">
-      <a href="index.html" class="brand-logo" aria-label="DivyaSeva home"><img src="assets/logo.svg" alt="DivyaSeva logo"></a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a class="nav-link" data-nav="home" href="index.html">Home</a>
-        <a class="nav-link" data-nav="puja" href="puja.html">Puja</a>
-        <a class="nav-link" data-nav="daan" href="daan.html">Daan</a>
-        <a class="nav-link" data-nav="about" href="about.html">About</a>
-        <a class="nav-link" data-nav="contact" href="contact.html">Contact</a>
+      <a href="index.html" class="brand" aria-label="DivyaSeva home">
+        <span class="brand-mark" data-icon="diya"></span>
+        <span>DivyaSeva<small>Online Puja & Seva</small></span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary navigation">
+        <a href="index.html" data-nav>Home</a>
+        <a href="puja.html" data-nav>Puja</a>
+        <a href="daan.html" data-nav>Daan</a>
+        <a href="about.html" data-nav>About</a>
+        <a href="contact.html" data-nav>Contact</a>
       </nav>
       <div class="nav-actions">
-        <a class="icon-btn" data-nav="dashboard" href="dashboard.html" aria-label="Dashboard"><i class="fa-regular fa-folder-open"></i></a>
-        <a class="btn btn-primary desktop-only" href="booking.html"><i class="fa-solid fa-hands-praying"></i> Book Seva</a>
-        <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+        <a class="btn btn-soft" href="dashboard.html">Dashboard</a>
+        <a class="btn btn-primary" href="booking.html">Book Seva <span data-icon="arrow"></span></a>
+        <button class="menu-btn" id="menuBtn" aria-label="Open menu"><span data-icon="menu"></span></button>
       </div>
     </div>
   </header>
+
   <main>
     <section class="page-hero">
-      <div class="container">
-        <div class="breadcrumbs"><a href="index.html">Home</a><i class="fa-solid fa-angle-right"></i><span>About</span></div>
-        <div class="eyebrow">About DivyaSeva</div>
-        <h1>A simple devotion-tech startup for Indian families.</h1>
-        <p class="lead">DivyaSeva is designed as a clean platform where users can book puja, daan and sankalp services without confusion, heavy text or boring design.</p>
+      <div class="container page-hero-grid">
+        <div class="reveal"><span class="eyebrow">About DivyaSeva</span><h1>A startup built around devotion, trust and simplicity.</h1><p>DivyaSeva is designed for Indian users who want a clean way to book pujas, offer daan, and stay connected with rituals from anywhere.</p></div>
+        <div class="page-hero-img reveal delay-1"><img src="assets/images/river-ghat.svg" alt="Indian ghat and temple illustration"></div>
       </div>
     </section>
     <section class="section">
-      <div class="container grid-2">
-        <article class="feature-card card reveal">
-          <div class="icon-tile"><i class="fa-solid fa-bullseye"></i></div>
-          <h2 style="font-size:34px;">Our approach</h2>
-          <p>We keep the UI simple, familiar and trustworthy for Indian users. The website avoids unnecessary clutter and focuses on a direct path: choose seva, fill details and track booking.</p>
-        </article>
-        <article class="feature-card card reveal">
-          <div class="icon-tile"><i class="fa-solid fa-seedling"></i></div>
-          <h2 style="font-size:34px;">Startup-ready</h2>
-          <p>The code is split into multiple pages, common CSS and reusable JavaScript. Firebase files are included so you can connect authentication and Firestore when you launch.</p>
-        </article>
+      <div class="container split">
+        <div class="photo-card reveal"><img src="assets/images/kalash-pattern.svg" alt="Kalash devotional picture"><div class="photo-label"><b>Faith with a modern interface</b><span>Simple pages, clear calls-to-action, and warm Indian visual identity.</span></div></div>
+        <div class="reveal delay-1"><span class="eyebrow">Our approach</span><h2 class="section-title">Not too complex. Not boring. Just trustworthy.</h2><p class="section-lead">The goal is to help users understand what they are booking, why it matters, and what update they receive after booking.</p></div>
+      </div>
+      <div class="container impact-grid">
+        <article class="impact-card reveal"><strong>24/7</strong><span>Online booking</span></article>
+        <article class="impact-card reveal delay-1"><strong>₹151+</strong><span>Easy seva start</span></article>
+        <article class="impact-card reveal delay-2"><strong>100%</strong><span>Mobile-first pages</span></article>
+        <article class="impact-card reveal delay-3"><strong>Firebase</strong><span>Ready structure</span></article>
       </div>
     </section>
-    <section class="section">
-      <div class="container">
-        <div class="section-head"><div><div class="eyebrow">FAQ</div><h2>Common questions.</h2></div></div>
-        <div class="accordion">
-          <div class="accordion-item open"><button class="accordion-btn">Is this Firebase ready? <i class="fa-solid fa-plus"></i></button><div class="accordion-content">Yes. Add your Firebase web config in public/js/firebase-config.js, enable Authentication and Firestore, then deploy using Firebase Hosting.</div></div>
-          <div class="accordion-item"><button class="accordion-btn">Is payment added? <i class="fa-solid fa-plus"></i></button><div class="accordion-content">No payment gateway is added because real payment needs verified business details. You can connect Razorpay, PhonePe or Cashfree later.</div></div>
-          <div class="accordion-item"><button class="accordion-btn">Can this become a real startup website? <i class="fa-solid fa-plus"></i></button><div class="accordion-content">Yes. The frontend is structured for expansion. Next step is backend verification, payment gateway, admin panel and real service fulfilment workflow.</div></div>
-        </div>
+    <section class="section tight">
+      <div class="container center reveal"><span class="eyebrow">Values</span><h2 class="section-title">What DivyaSeva should stand for.</h2></div>
+      <div class="container story-grid">
+        <article class="story-card reveal"><h3>Clarity</h3><p>Every service should tell users what will happen after payment and what details are required.</p></article>
+        <article class="story-card reveal delay-1"><h3>Respect</h3><p>Devotional content should feel premium without using unrealistic or over-promising language.</p></article>
+        <article class="story-card reveal delay-2"><h3>Trust</h3><p>The product should show proof, support contact, booking status, and clear communication.</p></article>
       </div>
     </section>
   </main>
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div>
-          <img src="assets/logo.svg" alt="DivyaSeva" style="width:170px; filter: brightness(0) invert(1) sepia(1) saturate(.3);">
-          <p>DivyaSeva helps Indian devotees book traditional puja, daan and sankalp seva online with a clean, simple and mobile-first experience.</p>
+          <h3>DivyaSeva</h3>
+          <p>A devotional services platform for Indian users to book puja, offer daan, receive updates, and stay connected with traditions from home.</p>
         </div>
         <div>
-          <h4>Explore</h4>
+          <h4>Services</h4>
           <a href="puja.html">Book Puja</a>
           <a href="daan.html">Daan Seva</a>
           <a href="booking.html">Sankalp Form</a>
-          <a href="dashboard.html">My Bookings</a>
         </div>
         <div>
           <h4>Company</h4>
           <a href="about.html">About</a>
           <a href="contact.html">Contact</a>
-          <a href="auth.html">Login</a>
+          <a href="dashboard.html">Dashboard</a>
         </div>
         <div>
           <h4>Support</h4>
+          <a href="mailto:support@divyaseva.in">support@divyaseva.in</a>
           <a href="tel:+919999999999">+91 99999 99999</a>
-          <a href="mailto:care@divyaseva.in">care@divyaseva.in</a>
-          <a href="contact.html">Help Center</a>
+          <a href="auth.html">Login / Register</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© 2026 DivyaSeva. All rights reserved.</span>
-        <span>Made for Indian devotees • Firebase-ready project</span>
+        <span>Built for Firebase Hosting • Made for Indian devotees</span>
       </div>
     </div>
   </footer>
-  <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
-    <a data-nav="home" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
-    <a data-nav="puja" href="puja.html"><i class="fa-solid fa-om"></i><span>Puja</span></a>
-    <a data-nav="daan" href="daan.html"><i class="fa-solid fa-hand-holding-heart"></i><span>Daan</span></a>
-    <a data-nav="dashboard" href="dashboard.html"><i class="fa-regular fa-folder-open"></i><span>Bookings</span></a>
-    <a data-nav="auth" href="auth.html"><i class="fa-regular fa-user"></i><span>Account</span></a>
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <a href="index.html" data-nav><span data-icon="temple"></span>Home</a>
+    <a href="puja.html" data-nav><span data-icon="diya"></span>Puja</a>
+    <a href="booking.html" data-nav><span data-icon="calendar"></span>Book</a>
+    <a href="dashboard.html" data-nav><span data-icon="heart"></span>Seva</a>
+    <a href="auth.html" data-nav><span data-icon="user"></span>Account</a>
   </nav>
-  <div id="toast" class="toast"></div>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script defer src="js/data.js"></script>
+  <script defer src="js/firebase-config.js"></script>
+  <script defer src="js/app.js"></script>
 </body>
 </html>
