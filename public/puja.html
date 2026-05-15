@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#173B2F" />
+  <title>Book Puja — DivyaSeva</title>
+  <meta name="description" content="DivyaSeva is a modern Indian online puja, daan and prasad seva platform." />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/data.js" defer></script>
+  <script type="module" src="js/firebase-config.js"></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body data-page="puja">
+  <div class="top-strip">
+    <div class="container">
+      <span><i class="fa-solid fa-location-dot"></i> Built for devotees across India</span>
+      <span><i class="fa-solid fa-phone"></i> Need help? <a href="contact.html">Contact seva support</a></span>
+    </div>
+  </div>
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-logo" aria-label="DivyaSeva home"><img src="assets/logo.svg" alt="DivyaSeva logo"></a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a class="nav-link" data-nav="home" href="index.html">Home</a>
+        <a class="nav-link" data-nav="puja" href="puja.html">Puja</a>
+        <a class="nav-link" data-nav="daan" href="daan.html">Daan</a>
+        <a class="nav-link" data-nav="about" href="about.html">About</a>
+        <a class="nav-link" data-nav="contact" href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="icon-btn" data-nav="dashboard" href="dashboard.html" aria-label="Dashboard"><i class="fa-regular fa-folder-open"></i></a>
+        <a class="btn btn-primary desktop-only" href="booking.html"><i class="fa-solid fa-hands-praying"></i> Book Seva</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumbs"><a href="index.html">Home</a><i class="fa-solid fa-angle-right"></i><span>Puja</span></div>
+        <div class="eyebrow">Book Puja</div>
+        <h1>Choose a puja for your sankalp.</h1>
+        <p class="lead">Search by deity, purpose or puja name. Every card leads to a dedicated booking form with clear details.</p>
+        <div class="filter-bar">
+          <input id="serviceSearch" class="input" type="search" placeholder="Search Shiv, Hanuman, Lakshmi...">
+          <select id="categoryFilter" class="select"></select>
+          <select id="sortFilter" class="select">
+            <option value="recommended">Recommended</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div id="pujaGrid" class="grid-3"></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <img src="assets/logo.svg" alt="DivyaSeva" style="width:170px; filter: brightness(0) invert(1) sepia(1) saturate(.3);">
+          <p>DivyaSeva helps Indian devotees book traditional puja, daan and sankalp seva online with a clean, simple and mobile-first experience.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <a href="puja.html">Book Puja</a>
+          <a href="daan.html">Daan Seva</a>
+          <a href="booking.html">Sankalp Form</a>
+          <a href="dashboard.html">My Bookings</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="auth.html">Login</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="tel:+919999999999">+91 99999 99999</a>
+          <a href="mailto:care@divyaseva.in">care@divyaseva.in</a>
+          <a href="contact.html">Help Center</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 DivyaSeva. All rights reserved.</span>
+        <span>Made for Indian devotees • Firebase-ready project</span>
+      </div>
+    </div>
+  </footer>
+  <nav class="mobile-bottom-nav" aria-label="Mobile navigation">
+    <a data-nav="home" href="index.html"><i class="fa-solid fa-house"></i><span>Home</span></a>
+    <a data-nav="puja" href="puja.html"><i class="fa-solid fa-om"></i><span>Puja</span></a>
+    <a data-nav="daan" href="daan.html"><i class="fa-solid fa-hand-holding-heart"></i><span>Daan</span></a>
+    <a data-nav="dashboard" href="dashboard.html"><i class="fa-regular fa-folder-open"></i><span>Bookings</span></a>
+    <a data-nav="auth" href="auth.html"><i class="fa-regular fa-user"></i><span>Account</span></a>
+  </nav>
+  <div id="toast" class="toast"></div>
+</body>
+</html>
